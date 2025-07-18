@@ -40,13 +40,23 @@ class BeeWarePlayground(toga.App):
     #     print(f"Hello, {self.name_input.value}")
 
     async def say_hello(self, widget):
-        fake = faker.Faker()
-        await self.main_window.dialog(
-            toga.InfoDialog(
-                f"Hello, {self.name_input.value}",
-                f"A message from {fake.name()}: {fake.text()}",
-            )
-        )
+        # await self.main_window.dialog(
+        #     # toga.InfoDialog(
+        #     #     f"Hello, {self.name_input.value}",
+        #     #     f"A message from {fake.name()}: {fake.text()}",
+        #     # )
+        #     # ### This path is inside the APP DATA (so it'd get nuked when the app is uninstalled)
+        #     # toga.InfoDialog(
+        #     #     str(self.paths.data / "test"),
+        #     #     str(self.paths.data / "test")
+        #     # )
+        # )
+        ### Opening a File Select Dialog isn't supported in android yet, but there ARE workarounds::
+        # https://github.com/beeware/toga/discussions/1990
+        # https://stackoverflow.com/questions/1043918/open-file-dialog-mvvm
+        # But there is no easy way. Everything I've seen so far is very hacky.
+
+        self.main_window.open_file_dialog("some title")
 
 def main():
     return BeeWarePlayground()
